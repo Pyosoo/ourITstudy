@@ -3,9 +3,9 @@ import './Board.css';
 function Board(props){
     return(
         <div className="Board_Box">
-            <h2>{props.writer}</h2>
-            <h4>{props.title}</h4>
-            <h5>{props.content}</h5>
+            <div className="title_box">{props.title}</div>
+            <div className="writer_box">{props.writer}</div>
+            <div className="content_box">{props.content}</div>
         </div>
     )
 }

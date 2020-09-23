@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Board from './UtilComponent/Board';
 import './App.css';
 // Google 로그인 관련
@@ -41,7 +41,7 @@ function App(props) {
       const data = snapshot.val();
       for (let key in data) {
         for (let key2 in data[key]) {
-          console.log(data[key][key2]);
+ //         console.log(data[key][key2]);
           list.push(data[key][key2]);
           list = list.reverse();
         }
@@ -50,14 +50,18 @@ function App(props) {
       console.log(list)
       for (let i = 0; i < limit; i++) {
         if (list[i] !== undefined) {
-          listtemp.push(<Board writer={list[i].writer} title={list[i].title} content={list[i].content} />)
+          listtemp.push(<Board key={list[i].writer} writer={list[i].writer} title={list[i].title} content={list[i].content} />)
         }
       }
       setlistitemTag(listtemp);
-      props.updateState(props.LoginStatus, fromDB);
+      props.updateState(props.LoginStatus, props.StoreData.fromDatabase);
     })
   }
 
+  auth.onAuthStateChanged(user=>{
+    console.log(`user =  ${user}`);
+    console.log(`LoginStatus = ${props.StoreData.LoginStatus}`);
+  })
 
   useEffect(() => {
     console.log('use effect');
@@ -99,7 +103,7 @@ function App(props) {
     }
   }
 
-  if (!props.StoreData.LoginStatus) {
+  if (props.StoreData.LoginStatus === false || props.StoreData.LoginStatus === null) {
     return (
       <GoogleSignin />
     )
@@ -108,8 +112,10 @@ function App(props) {
       <div>
         <div>로그인이 완료되었습니다. 게시판 메인 페이지입니다.</div>
         <button onClick={() =>  {
-          props.updateState(false, props.StoreData.fromDB);
-          auth.signOut(); 
+          console.log(props.StoreData.LoginStatus);
+          auth.signOut();
+          props.updateState(false, props.StoreData.fromDatabase);
+          console.log(props.StoreData.LoginStatus);
         }}>로그아웃</button>
 
         <input value={writervalue} onChange={handleWriterChange}></input>

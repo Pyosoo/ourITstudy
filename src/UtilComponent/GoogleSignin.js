@@ -11,16 +11,19 @@ import { actionCreators } from '../store';
 
 function GoogleSignin(props){
 
-    useEffect(()=>{
-        auth.onAuthStateChanged(user => {
-            props.updateState(user);
-        })
+  useEffect(()=>{
+    auth.onAuthStateChanged(user => {
+      if(user != null){
+        props.updateState(user.displayName, props.StoreData.fromDatabase);
+        console.log(`${user.displayName} 님 로그인하셨습니다`);
+      }
     })
+  })
+   
 
     return (
       <div className="LoginPage_Container">
         <div className="Login_ImageBox"></div>
-        <button type="submit" value="Submit Form" className="Login_Btn">SIGN IN</button>
         <button onClick={signInWithGoogle} className="Google_Login_Btn Login_Btn"></button>
       </div>
     )
