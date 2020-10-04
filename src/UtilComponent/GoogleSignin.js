@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
+
 import 'firebase/firestore';
 import 'firebase/auth';
 import { signInWithGoogle } from '../firebase_config';
 import { auth } from '../firebase_config';
+
 import './GoogleSignin.css';
 
 // redux 관련 import
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
+
+// Github 로그인 관련
+
 
 function GoogleSignin(props){
 

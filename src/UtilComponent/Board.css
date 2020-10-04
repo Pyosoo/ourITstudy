@@ -1,19 +1,73 @@
-.Board_Box{
-    display: inline-block;
-    width: 200px;
-    height: 300px;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 50px;
-    border-style: solid;
-}
-
-.title_box{
-
-}
-.writer_box{
-
-}
-.content_bpx{
+@media (min-width: 1281px){
     
+    .Boards_Total_Container{
+        width: 100%;
+        height: max-content;
+        background-image: url('../Images/MakeBoardBack.png');
+        background-repeat: repeat;
+        background-size: contain;
+        background-position: center;
+    }
+    .Boards_Box{
+        width: 100%;
+        margin-right: auto;
+        text-align: center;
+    }
+    .Board_Header{
+        position: absolute;
+        top: 80px;
+        display: block;
+        height: 50px;
+        background-color:  transparent;
+        text-align: center;
+    }
+    .SeeMoreBtn{
+        margin-left: auto;
+        background-color: transparent;
+        margin-right: auto;
+        color: white;
+        outline: 0;
+    }
+    .SeeMoreBtn:hover{
+        color: black;
+    }
+    .Board_select_btn{
+        outline: 0;
+    }
+}
+@media (min-width: 1024px) and (max-width: 1280px){
+    
+    .Boards_Total_Container{
+        width: 100%;
+        height: max-content;
+        background-image: url('../Images/MakeBoardBack.png');
+        background-repeat: repeat;
+        background-size: contain;
+        background-position: center;
+    }
+    .Boards_Box{
+        width: 100%;
+        margin-right: auto;
+        text-align: center;
+    }
+    .Board_Header{
+        display: block;
+        width: 100%;
+        height: 50px;
+        background-color:  #EEEAD8;
+        text-align: center;
+    }
+    .SeeMoreBtn{
+        margin-left: auto;
+        background-color: transparent;
+        margin-right: auto;
+        color: white;
+        outline: 0;
+    }
+    .SeeMoreBtn:hover{
+        color: black;
+    }
+    .Board_select_btn{
+        outline: 0;
+    }
 }

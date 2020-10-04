@@ -1,0 +1,173 @@
+@media (min-width: 1281px){
+.Boards_Real_Back{
+    width: 100%;
+    height: 85vh;
+    background-color: rgb(82, 65, 41);
+}
+
+.line1{
+    width: 100%;
+    text-align: center;
+}
+
+.MakeBoard_span{
+    font-size: 25px;
+}
+.Boards_Back{
+    width: 70%;
+    height: 85vh;
+    background-image: url('../Images/MakeBoardBack.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 7vh;
+}
+
+.Boards_Container{
+    width: 50%;
+    height: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    background-image: url('../Images/MakeBoardMemoBack.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.MakeBoard_writer_box{
+    width: max-content;
+    height: max-content;
+    line-height: 40px;
+    font-size: 30px;
+    vertical-align: middle;
+    background-color: #EEEAD8;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.MakeBoard_content_box{
+    width: 400px;
+    height: 80px;
+    background-color: #EEEAD8;
+}
+
+.MakeBoard_span2{
+    width: 70%;
+    font-size: 20px;
+    margin-top: 20px;
+    display: block;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+}
+.MakeBoard_Input{
+    margin-left: 15%;
+    background-color: #EEEAD8;
+}
+
+.MakeBoard_Submit_btn{
+    position: absolute;
+    top: 50vh;
+    right: 10vw;
+    width: 100px;
+    height: 50px;
+    background-color: #EEEAD8;
+    color: black;
+}   
+.MakeBoard_Submit_btn:hover{
+    background-color: brown;
+    color: white;
+}
+}
+
+@media (min-width: 1024px) and (max-width: 1280px){
+    .Boards_Real_Back{
+        width: 100%;
+        height: 85vh;
+        background-color: rgb(82, 65, 41);
+    }
+    
+    .line1{
+        width: 100%;
+        text-align: center;
+    }
+    
+    .MakeBoard_span{
+        font-size: 25px;
+    }
+    .Boards_Back{
+        width: 70%;
+        height: 85vh;
+        background-image: url('../Images/MakeBoardBack.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 7vh;
+    }
+    
+    .Boards_Container{
+        width: 50%;
+        height: max-content;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+        background-image: url('../Images/MakeBoardMemoBack.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    
+    .MakeBoard_writer_box{
+        width: max-content;
+        height: max-content;
+        line-height: 40px;
+        font-size: 30px;
+        vertical-align: middle;
+        background-color: #EEEAD8;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .MakeBoard_content_box{
+        width: 400px;
+        height: 80px;
+        background-color: #EEEAD8;
+    }
+    
+    .MakeBoard_span2{
+        width: 70%;
+        font-size: 20px;
+        margin-top: 20px;
+        display: block;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0;
+    }
+    .MakeBoard_Input{
+        margin-left: 15%;
+        background-color: #EEEAD8;
+    }
+    
+    .MakeBoard_Submit_btn{
+        position: absolute;
+        top: 50vh;
+        right: 5vh;
+        width: 100px;
+        height: 50px;
+        background-color: #4c4837;
+        color: white;
+    }   
+}

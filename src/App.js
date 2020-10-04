@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Board from './UtilComponent/Board';
+import BoardItem from './UtilComponent/BoardItem';
 import './App.css';
+import ourstudylogo from './Images/ourstudylogo.png';
 // Google 로그인 관련
 import GoogleSignin from './UtilComponent/GoogleSignin';
 import { auth } from './firebase_config';
@@ -9,126 +10,55 @@ import { auth } from './firebase_config';
 import { connect } from 'react-redux';
 import { actionCreators } from './store';
 
-// firebase 관련
-import firebase from 'firebase';
 
-
-let database = firebase.database();
+// router 관련
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Board from './UtilComponent/Board';
+import MakeBoard from './UtilComponent/MakeBoard';
+import MyPage from './UtilComponent/MyPage';
 
 
 
 
 function App(props) {
 
-  // 현재 firebase DB에 있는 정보가져와서 fromDB에 옮기고 store(fromDatabase)에 저장
-  const [fromDB, setfromDB] = useState([]);
-  const [listitemTag, setlistitemTag] = useState();
-  const [limit, setlimit] = useState(8);
-
-  // inpurt 값 state
-  const [writervalue, setwritervalue] = useState('');
-  const [titlevalue, settitlevalue] = useState('');
-  const [contentvalue, setcontentvalue] = useState('');
-  const [DPlimitBtn, setDPlimitBtn] = useState('block');
 
 
-  const getData = () => {
-    console.log('getdata실행')
-    let reference = database.ref('/');
-    reference.on('value', snapshot => {
-      let listtemp = [];
-      let list = [];
-      const data = snapshot.val();
-      for (let key in data) {
-        for (let key2 in data[key]) {
- //         console.log(data[key][key2]);
-          list.push(data[key][key2]);
-          list = list.reverse();
-        }
-      }
-      setfromDB(list);
-      console.log(list)
-      for (let i = 0; i < limit; i++) {
-        if (list[i] !== undefined) {
-          listtemp.push(<Board key={list[i].writer} writer={list[i].writer} title={list[i].title} content={list[i].content} />)
-        }
-      }
-      setlistitemTag(listtemp);
-      props.updateState(props.LoginStatus, props.StoreData.fromDatabase);
-    })
-  }
-
-  auth.onAuthStateChanged(user=>{
+  // ●●●●●●●●●●●●●●●●●●●●●●●●● 유저 변화 있을시 자동 실행 ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
+  auth.onAuthStateChanged(user => {
     console.log(`user =  ${user}`);
     console.log(`LoginStatus = ${props.StoreData.LoginStatus}`);
   })
-
-  useEffect(() => {
-    console.log('use effect');
-    getData();
-  }, [limit])
+  //●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 
 
 
-  const handleWriterChange = (e) => {
-    setwritervalue(e.target.value);
-  }
-  const handleTitleChange = (e) => {
-    settitlevalue(e.target.value);
-  }
-  const handleContentChange = (e) => {
-    setcontentvalue(e.target.value);
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setwritervalue('');
-    settitlevalue('');
-    setcontentvalue('');
-    firebase.database().ref().child(`boards`).push({
-      writer: writervalue,
-      title: titlevalue,
-      content: contentvalue
-    })
-  }
-
-  const limitplus = (e) => {
-    e.preventDefault();
-    if (limit < fromDB.length) {
-      if (limit+8 > fromDB.length) setDPlimitBtn('none');
-      setlimit(limit + 8);
-    }
-    else {
-      setDPlimitBtn('none');
-    }
-  }
-
-  if (props.StoreData.LoginStatus === false || props.StoreData.LoginStatus === null) {
+  if (props.StoreData.LoginStatus === false || props.StoreData.LoginStatus === null || props.StoreData.LoginStatus === undefined) {
     return (
       <GoogleSignin />
     )
   } else {
     return (
-      <div>
-        <div>로그인이 완료되었습니다. 게시판 메인 페이지입니다.</div>
-        <button onClick={() =>  {
-          console.log(props.StoreData.LoginStatus);
-          auth.signOut();
-          props.updateState(false, props.StoreData.fromDatabase);
-          console.log(props.StoreData.LoginStatus);
-        }}>로그아웃</button>
-
-        <input value={writervalue} onChange={handleWriterChange}></input>
-        <input value={titlevalue} onChange={handleTitleChange}></input>
-        <input value={contentvalue} onChange={handleContentChange}></input>
-        <button onClick={handleSubmit}>제출하기</button>
-
-        <div className="Content_Container">
-          {listitemTag}
+      <Router>
+        <div className="NavibarRouter">
+          <button className="logoutBtn" onClick={() => {
+                console.log(props.StoreData.LoginStatus);
+                auth.signOut();
+                props.updateState(false, props.StoreData.fromDatabase);
+                console.log(props.StoreData.LoginStatus);
+            }}>EXIT</button>
+          
+          <img src={ourstudylogo} className="logo_img"/>
+          <Link className="linkitem" to="/mypage">My</Link>
+          <Link className="linkitem" to="/write">Write</Link>
+          <Link className="linkitem" to="/">Board</Link>
         </div>
-
-        <button onClick={limitplus} style={{ display: DPlimitBtn }}>더보기</button>
-      </div>
+        <div className="ContentRouter">
+          <Route exact path="/" render={()=> <Board />} />
+          <Route path="/write" render={()=> <MakeBoard />} />
+          <Route path="/mypage" render={()=> <MyPage />} />
+        </div>
+      </Router>
     )
   }
 
@@ -140,7 +70,7 @@ function mapStateToProps(state, ownProps) {
   return { StoreData: state };   //toDos에 state를 가져온다.
 }
 
-// reducer에 action을 알리는 함수 
+// reducer에 action을 알리는 함수
 function mapDispatchToProps(dispatch) {
   return {
     updateState: status => dispatch(actionCreators.updateState(status))
