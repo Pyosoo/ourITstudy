@@ -1,5 +1,21 @@
+@keyframes fade-in {
+    from {
+        height: 0;
+    }
+    to {
+        height: 172px;
+    }
+  }
 
-@media (min-width: 1281px){
+  @font-face{
+    font-family: BMJUA;
+    src: url('../Fonts/BMJUA_ttf.7dbe95a7.7dbe95a7.ttf');
+  }
+.Board_item_Content_span{
+    font-size: 20px;
+}
+@media (min-width: 1601px){
+    
     .Board_item_Box{
         display: block;
         text-align: center;
@@ -10,18 +26,58 @@
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    
+    /* 게시글 상자 관련  */
+    .Board_item_Top{
+        width: 900px;
+        height: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background-image: url('../Images/BoardItemTop.png');
+        margin-bottom: -14px;
+    }
+    .Board_item_Content_hide{
+        width: 900px;
+        height: 1px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: -10px;
+        color: transparent; 
+        background-image: url('../Images/BoardItemBack.PNG');
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: all ease 1s 0s;
+    }
+    .Board_item_Content_show{
+        width: 900px;
+        height: 200px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: -10px;
+        background-image: url('../Images/BoardItemBack.PNG');
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: height ease 1s 0s;
+    }
+    .Board_item_Content_show:hover{
+        cursor: pointer;
+    }
     .Board_item_line{
         display: inline-block;
-        background-image: url('../Images/BoardItemBackground.png');
+        background-image: url('../Images/BoardItemBottom.png');
         background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 900px;
-        height: 120px;
-        margin-top: 3px;
+        width: 901px;
+        height: 172px;
+        margin-top: 10px;
+        margin-right: -1px;
         margin-bottom: 3px;
+        line-height: 172px;
+        vertical-align: middle;
     }
+
+
+
     .Board_item{
         font-weight: bold;
     }
@@ -53,14 +109,220 @@
     .title_box:hover{
         cursor: pointer;
     }
-    .region_box, .position_box{
+    .region_box{
         display: inline-block;
-        width: max-content;
+        width: 60px;
         height: 40px;
         line-height: 40px;
         vertical-align: middle;
         text-align: center;
         font-size: 15px;
+        margin-left: 3px;
+        margin-right: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-width: 3px;
+        font-weight: bold;
+        color: white;
+    }
+    .position_box{
+        display: inline-block;
+        width: 120px;
+        height: 40px;
+        line-height: 40px;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 13px;
+        margin-left: 3px;
+        margin-right: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-width: 3px;
+        font-weight: bold;
+        color: white;
+    }
+    .region_box{
+        background-color: #5c5846;
+    }
+    .position_box{
+        background-color: #4c4837;
+    }
+    .content_box{
+        width: 600px;
+        height: 180px;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        word-break:break-all;
+        overflow-y: auto;
+        font-size: 14px;
+    }
+    .mine_menu:hover{
+        cursor: pointer;
+    }
+    .newheader{
+        display: block;
+        width: max-content;
+        margin-bottom: 3px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .newheader2{
+        margin-top: 20px;
+    }
+    .newtitle_box{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .newcontent_box{
+        display: block;
+        width: 200px;
+        height: 150px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .Board_item_like{
+        line-height: 40px;
+        height: 40px;
+        vertical-align: middle;
+        padding-right: 13px;
+        padding-top: 6px;
+        font-size: 40px;
+        color: yellow;
+    }
+    .Board_item_like:hover{
+        cursor: pointer;
+    }
+}
+
+
+@media (min-width: 1024px) and (max-width: 1600px){
+    .Board_item_Box{
+        display: block;
+        text-align: center;
+        width: 100%;
+        height: max-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .Board_item_Top{
+        width: 900px;
+        height: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background-image: url('../Images/BoardItemTop.png');
+        margin-bottom: -14px;
+    }
+    .Board_item_Content_hide{
+        width: 900px;
+        height: 1px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: -10px;
+        color: transparent; 
+        background-image: url('../Images/BoardItemBack.PNG');
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: all ease 1s 0s;
+        overflow: hidden;
+    }
+    .Board_item_Content_show{
+        width: 900px;
+        height: 200px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: -10px;
+        background-image: url('../Images/BoardItemBack.PNG');
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: height ease 1s 0s;
+    }
+    .Board_item_Content_show:hover{
+        cursor: pointer;
+    }
+    .Board_item_line{
+        display: inline-block;
+        background-image: url('../Images/BoardItemBottom.png');
+        background-size: cover;
+        width: 901px;
+        height: 172px;
+        margin-top: 10px;
+        margin-right: 0px;
+        margin-bottom: 3px;
+        line-height: 172px;
+        vertical-align: middle;
+    }
+    .Board_item{
+        font-weight: bold;
+    }
+    .content_box{
+        width: 500px;
+        height: 180px;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        word-break:break-all;
+        overflow-y: auto;
+        font-size: 14px;
+    }
+    .Board_item_more{
+        display: inline-block;
+        width: max-content;
+        height: 20px;
+        line-height: 20px;
+        border-width: 1px;
+        outline: 0;
+    }
+    .Board_item_more:hover{
+        cursor: pointer;
+    }
+    .MakeBoard_Submit_btn{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .title_box{
+        display: inline-block;
+        width: 50%;
+        font-size: 18px;
+        line-height: 120px;
+        margin-right: auto;
+        vertical-align: middle;
+        text-align: left;
+        font-size: 25px;
+    }
+    .title_box:hover{
+        cursor: pointer;
+    }
+    .region_box{
+        display: inline-block;
+        width: 60px;
+        height: 40px;
+        line-height: 40px;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 15px;
+        margin-left: 3px;
+        margin-right: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-width: 3px;
+        font-weight: bold;
+        color: white;
+    }
+    .position_box{
+        display: inline-block;
+        width: 120px;
+        height: 40px;
+        line-height: 40px;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 13px;
         margin-left: 3px;
         margin-right: 3px;
         padding-left: 10px;
@@ -106,9 +368,9 @@
         line-height: 40px;
         height: 40px;
         vertical-align: middle;
-        padding-right: 13px;
+        padding-right: 30px;
         padding-top: 6px;
-        font-size: 40px;
+        font-size: 25px;
         color: yellow;
     }
     .Board_item_like:hover{
@@ -117,8 +379,12 @@
 }
 
 
-@media (min-width: 1024px) and (max-width: 1280px){
 
+
+
+
+
+@media (min-width: 360px) and (max-width: 480px){
     .Board_item_Box{
         display: block;
         text-align: center;
@@ -129,21 +395,78 @@
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    
+    .Board_item_Top{
+        width: 200px;
+        height: 14px;
+        margin-left: auto;
+        margin-right: auto;
+        background-image: url('../Images/BoardItem_Mobile_top.png');
+        margin-bottom: -14px;
+    }
+    .Board_item_Content_hide{
+        width: 200px;
+        height: 1px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: -10px;
+        color: transparent; 
+        background-image: url('../Images/BoardItem_Mobile_bottom.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: all ease 1.5s 0s;
+        overflow: hidden;
+    }
+    .Board_item_Content_show{
+        width: 200px;
+        height: 170px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: -20px;
+        background-image: url('../Images/BoardItem_Mobile_middle.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: all ease 1.5s 0s;
+    }
+    .Board_item_Content_show:hover{
+        cursor: pointer;
+    }
     .Board_item_line{
         display: inline-block;
-        background-image: url('../Images/BoardItemBackground.png');
+        background-image: url('../Images/BoardItem_Mobile_bottom.png');
         background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 900px;
-        height: 120px;
-        margin-top: 3px;
+        width: 200px;
+        height: 70px;
+        margin-top: 10px;
+        margin-right: 0px;
         margin-bottom: 3px;
     }
     .Board_item{
         font-weight: bold;
     }
+    .content_box{
+        width: 170px;
+        height: 80px;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        word-break:break-all;
+        overflow-y: auto;
+        font-size: 9px;
+    }
+    .writer_box{
+        padding-top: 3px;
+    }
+    .writer_box, .date_box{
+        display: block;
+        font-size: 10px;
+    }
+    .number_box{
+        font-size: 10px;
+    }
+
+
     .Board_item_more{
         display: inline-block;
         width: max-content;
@@ -162,28 +485,40 @@
     }
     .title_box{
         display: inline-block;
-        width: 50%;
-        font-size: 18px;
-        line-height: 120px;
-        vertical-align: middle;
-        text-align: left;
-        font-size: 25px;
+        height: 30px;
+        width: 100%;
+        font-size: 10px;
+        padding-top: 5px;
+        margin-right: auto;
+        text-align: center;
     }
     .title_box:hover{
         cursor: pointer;
     }
-    .region_box, .position_box{
+    .region_box{
         display: inline-block;
-        width: max-content;
-        height: 40px;
-        line-height: 40px;
+        width: 50px;
+        height: 30px;
+        line-height: 30px;
         vertical-align: middle;
         text-align: center;
-        font-size: 15px;
-        margin-left: 3px;
-        margin-right: 3px;
-        padding-left: 10px;
-        padding-right: 10px;
+        font-size: 8px;
+        margin-left: 1px;
+        margin-right: 1px;
+        border-width: 3px;
+        font-weight: bold;
+        color: white;
+    }
+    .position_box{
+        display: inline-block;
+        width: 70px;
+        height: 30px;
+        line-height: 30px;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 7px;
+        margin-left: 1px;
+        margin-right: 1px;
         border-width: 3px;
         font-weight: bold;
         color: white;
@@ -219,5 +554,16 @@
         height: 150px;
         margin-left: auto;
         margin-right: auto;
+    }
+    .Board_item_like{
+        float: right;
+        height: 40px;
+        font-size: 20px;
+        color: yellow;
+        margin-right: 20px;
+        margin-top: -5px;
+    }
+    .Board_item_like:hover{
+        cursor: pointer;
     }
 }

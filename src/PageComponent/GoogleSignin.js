@@ -1,35 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import 'firebase/firestore';
 import 'firebase/auth';
-import { signInWithGoogle } from '../firebase_config';
-import { auth } from '../firebase_config';
-
+import { signInWithGoogle , auth} from '../firebase_config';
+import firebase from 'firebase';
 import './GoogleSignin.css';
+
 
 // redux 관련 import
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
 
-// Github 로그인 관련
-
+let provider = new firebase.auth.GithubAuthProvider();
 
 function GoogleSignin(props){
 
-  useEffect(()=>{
+  const signInWithGithub = () => {
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      let user = result.user;
+      console.log(user);
+      // ...
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
+ 
+  
+
     auth.onAuthStateChanged(user => {
       if(user != null){
-        props.updateState(user.displayName, props.StoreData.fromDatabase);
-        console.log(`${user.displayName} 님 로그인하셨습니다`);
+        props.updateState(auth.currentUser, props.StoreData.fromDatabase);
+        console.log(auth.currentUser);
       }
     })
-  })
    
 
     return (
       <div className="LoginPage_Container">
         <div className="Login_ImageBox"></div>
         <button onClick={signInWithGoogle} className="Google_Login_Btn Login_Btn"></button>
+        <button onClick={signInWithGithub} className="Github_Login_Btn Login_Btn"></button>
       </div>
     )
   }

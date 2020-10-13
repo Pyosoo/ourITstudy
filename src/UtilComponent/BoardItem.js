@@ -3,9 +3,9 @@ import './BoardItem.css';
 import menu from '../Images/menu.png';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { useHistory } from 'react-router-dom';
 import { Modal } from 'antd';
 import 'antd/dist/antd.css';
+import BoardItemPage from './BoardItemPage';
 
 // redux 관련 import
 import { connect } from 'react-redux';
@@ -13,18 +13,19 @@ import { actionCreators } from '../store';
 
 import firebase from 'firebase';
 import { auth } from '../firebase_config';
+import { render } from '@testing-library/react';
 let database = firebase.database();
 
 
 
 function BoardItem(props) {
-    let history = useHistory();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [visible, setvisible] = useState(false);
-    const [newtitle, setnewtitle] = useState(null);
-    const [newcontent, setnewcontent] = useState(null);
+    const [newtitle, setnewtitle] = useState(props.title);
+    const [newcontent, setnewcontent] = useState(props.content);
     const [like, setlike] = useState('☆');
+   
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -33,7 +34,7 @@ function BoardItem(props) {
     // firebase realtime database에서 삭제하고 새로고침시킴(이게 고민)
     const handleCloseAndDelete = () => {
         setAnchorEl(null);
-        console.log(database.ref().child('boards').child(props.id));
+        console.log(props);
         database.ref().child('boards').child(props.id).remove();
         alert("삭제되었습니다.");
         window.location.replace("/");
@@ -64,6 +65,8 @@ function BoardItem(props) {
                 content: newcontent,
                 title: newtitle,
                 email: props.email,
+                day: props.day,
+                number : props.number,
                 likePeople: props.likePeople
             });
             alert("수정되었습니다.");
@@ -90,23 +93,31 @@ function BoardItem(props) {
     }
 
     const handleChangeLike = e => {
-        /*
-        if (like === '☆') {
-            //해당 글에 좋아요한 인원의 eamil 추가해줘야함
-            database.ref().child('boards').child(props.id).set({
-                writer: props.writer,
-                region: props.region,
-                position: props.position,
-                content: props.content,
-                title: props.title,
-                email: props.email,
-                likePeople: [...props.likePeople, auth.currentUser.email]
-            });
-            alert("수정되었습니다.");
-            console.log(`${props.id} 글을 ${auth.currentUser.email}이 좋아요를 눌렀습니다.`)
-            setlike('★');
-        } else {
+        if (props.email === auth.currentUser.email) {
+            alert("자신의 글은 스크랩할 수 없습니다.");
+        }
+        else {
+            if (like === '☆') {
                 //해당 글에 좋아요한 인원의 eamil 추가해줘야함
+                let newlikePeople = props.likePeople;
+                newlikePeople.push(auth.currentUser.email);
+                database.ref().child('boards').child(props.id).set({
+                    writer: props.writer,   
+                    region: props.region,
+                    position: props.position,
+                    content: props.content,
+                    title: props.title,
+                    email: props.email,
+                    day: props.day,
+                    number: props.number,
+                    likePeople: newlikePeople
+                });
+                e.preventDefault(); 
+                alert("스크랩했습니다. My페이지에서 확인할 수 있습니다.");
+                console.log(`${props.id} 글을 ${auth.currentUser.email}이 스크랩.`)
+                setlike('★');
+            } else {
+                //해당 글에 좋아요한 인원의 eamil 을 삭제해줘야함
                 let newlikePeople = props.likePeople.filter(data => data !== auth.currentUser.email);
                 database.ref().child('boards').child(props.id).set({
                     writer: props.writer,
@@ -115,34 +126,36 @@ function BoardItem(props) {
                     content: props.content,
                     title: props.title,
                     email: props.email,
+                    day: props.day,
+                    number: props.number,
                     likePeople: newlikePeople
                 });
-                alert("수정되었습니다.");
-                console.log(`${props.id} 글을 ${auth.currentUser.email}이 좋아요를 눌렀습니다.`)
+                e.preventDefault(); 
+                alert("스크랩 해제하였습니다.");
+                console.log(`${props.id} 글을 ${auth.currentUser.email}이 스크랩 취소.`)
                 setlike('☆');
             }
-            */
-    }
-    
+        }
 
-    const [BoarditemContentDP, setBoarditemContentDP] = useState('none');
+    }
+
+
+    const [BoarditemContentDP, setBoarditemContentDP] = useState('Board_item_Content_hide');
 
     const ShowContent = () => {
-        if (BoarditemContentDP === 'none')
-            setBoarditemContentDP('block');
-        else setBoarditemContentDP('none');
+        if (BoarditemContentDP === 'Board_item_Content_hide')
+            setBoarditemContentDP('Board_item_Content_show');
+        else setBoarditemContentDP('Board_item_Content_hide');
     }
 
     let mine = props.mine;
 
     // 좋아요한 글이라면 채워진 별표로 바꿔주는 것
-    useEffect(()=>{
-        /*
-        if(props.likePeople.findIndex(data=> data === auth.currentUser.email) !== -1){
+    useEffect(() => {
+        if (props.likePeople !== undefined && props.likePeople.find(data => data === auth.currentUser.email) !== undefined) {
             setlike('★')
         }
-        */
-    },[])
+    }, [])
 
     return (
         <div className="Board_item_Box">
@@ -165,22 +178,24 @@ function BoardItem(props) {
                 <p className="newheader">제목</p>
                 <input className="newtitle_box" value={newtitle} placeholder={props.title} onChange={handleNewTitleChange}></input>
                 <p className="newheader newheader2">내용</p>
-                <input className="newcontent_box" value={newcontent} placeholder={props.content} onChange={handleNewContentChange}></input>
+                <textarea className="newcontent_box" value={newcontent} placeholder={props.content} onChange={handleNewContentChange}></textarea>
             </Modal>
 
+            <div className="Board_item_Top"></div> {/* 두루마리의 맨위 기둥 이미지 */}
+            <div className={BoarditemContentDP} onClick={ShowContent}>
+                <span className="Board_item writer_box Board_item_Content_span">작성자 : {props.writer}</span> <span className="number_box">연락처 : {props.number}</span> <br />
+                <span className="Board_item date_box Board_item_Content_span">일시 : {props.day}</span> <br/>
+                <p className="Board_item content_box Board_item_Content_span">{props.content}</p> <br />
+            </div>
             <div className="Board_item_line">
                 <div className="Board_item title_box" onClick={ShowContent}>{props.title}</div>
                 <div className="Board_item region_box">{props.region}</div>
                 <div className="Board_item position_box">{props.position}</div>
-                <img className="mine_menu" style={{ display: mine === "yes" ? 'inline-block' : 'none' }} src={menu} onClick={handleClick} />
-                <div className="Board_item_more" onClick={ShowContent}>내용보기</div>
-                <span className="Board_item_like" onClick={handleChangeLike}>{like}</span>
+                <img alt="2" className="mine_menu" style={{ display: mine === "yes" ? 'inline-block' : 'none' }} src={menu} onClick={handleClick} />
+                <span className="Board_item_like" onClick={handleChangeLike}> {like} </span>
             </div>
 
-            <div className="Board_item_content" style={{ display: BoarditemContentDP }}>
-                작성자 : <span className="Board_item writer_box">{props.writer}</span> <br />
-                내용 : <span className="Board_item content_box">{props.content}</span>
-            </div>
+            
 
         </div>
     )

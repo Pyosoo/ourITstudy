@@ -1,0 +1,42 @@
+.NoDataP{
+    font-size: 25px;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+.MyPage_Header{
+    width: 100%;
+    text-align: center;
+}
+.MyPage_linkitem{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    color: rgb(124, 68, 58);
+}
+.MyPage_linkitem:hover{
+    color: rgb(124, 68, 58);
+}
+
+/* 페이지 접속시 linkitem 이 변경되는 클래스명 */
+.OnPage1{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    color: brown;
+    border-bottom: thin solid rgb(114, 65, 53);
+}
+.OnPage1:hover{
+    color: brown;
+}
+.OnPage2{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    color: brown;
+    border-bottom: thin solid  rgb(114, 65, 53);
+}
+.OnPage2:hover{
+    color: brown;
+}

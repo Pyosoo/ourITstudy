@@ -1,0 +1,272 @@
+/* 전체 공통 */
+.Qimg{
+    display: inline-block;
+    background-image: url('../Images/question.png');
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+}
+.Qimg:hover{
+    cursor: pointer;
+}
+
+/* 공통 */
+.Boards_Real_Back{
+    width: 100%;
+    height: 90vh;
+}
+
+.Boards_Back{
+    width: 100%;
+    height: 90vh;
+    background-image: url('../Images/CheckBack.png');
+    background-size: contain;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 7vh;
+}
+
+
+
+
+
+
+@media (min-width: 1601px){
+
+.line1{
+    width: 100%;
+    text-align: center;
+}
+
+.MakeBoard_span{
+    font-size: 20px;
+    font-family: BMJUA;
+}
+.Boards_Container{
+    width: 700px;
+    height: 740px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    background-image: url('../Images/MemoBackLarge.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.MakeBoard_writer_box{
+    width: max-content;
+    height: max-content;
+    line-height: 40px;
+    font-size: 30px;
+    vertical-align: middle;
+    background-color: #EEEAD8;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: BMJUA;
+}
+.MakeBoard_content_box{
+    width: 500px;
+    height: 100px;
+    background-color: #EEEAD8;
+    border-radius: 5px 5px 5px 5px;
+    font-family: BMJUA;
+}
+
+.MakeBoard_span2{
+    width: 70%;
+    font-size: 20px;
+    margin-top: 20px;
+    display: block;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    font-family: BMJUA;
+}
+.MakeBoard_Input{
+    margin-left: 15%;
+    background-color: #EEEAD8;
+    font-family: BMJUA;
+    
+}
+
+.MakeBoard_Submit_btn{
+    width: 100px;
+    height: 50px;
+    margin-top: 20px;
+    background-color: #EEEAD8;
+    font-family: BMJUA;
+    color: black;
+}   
+.MakeBoard_Submit_btn:hover{
+    background-color: brown;
+    color: white;
+    font-family: BMJUA;
+}
+}
+
+@media (min-width: 1024px) and (max-width: 1600px){
+   
+    
+    .line1{
+        width: 100%;
+        text-align: center;
+    }
+    
+    .MakeBoard_span{
+        font-size: 15px;
+        font-family: BMJUA;
+    }
+    .Boards_Container{
+        width: 470px;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+        background-image: url('../Images/MemoBackSmall.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        font-family: BMJUA;
+    }
+    
+    .MakeBoard_writer_box{
+        width: max-content;
+        height: max-content;
+        line-height: 40px;
+        font-size: 15px;
+        vertical-align: middle;
+        background-color: #EEEAD8;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .MakeBoard_content_box{
+        width: 250px;
+        height: 80px;
+        background-color: #EEEAD8;
+        font-family: BMJUA;
+    }
+    
+    .MakeBoard_span2{
+        width: 70%;
+        font-size: 15px;
+        margin-top: 10px;
+        display: block;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0;
+        font-family: BMJUA;
+    }
+    .MakeBoard_region{
+        margin-top: 0;
+    }
+    
+    .MakeBoard_Input{
+        margin-left: 15%;
+        background-color: #EEEAD8;
+        border-radius: 5px 5px 5px 5px;
+        font-family: BMJUA;
+    }
+    
+    .MakeBoard_Submit_btn{
+        width: 80px;
+        height: 40px;
+        margin-top: 30px;
+        background-color: #EEEAD8;
+        color: black;
+        font-family: BMJUA;
+    }   
+    .MakeBoard_Submit_btn:hover{
+        background-color: brown;
+        color: white;
+    }
+}
+
+
+@media (min-width: 360px) and (max-width: 480px){
+    .line1{
+        width: 100%;
+        text-align: center;
+    }
+    
+    .MakeBoard_span{
+        font-size: 15px;
+        font-family: BMJUA;
+    }
+    .Boards_Container{
+        width: 360px;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 5vh;
+        background-image: url('../Images/MemoBackSmall.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        font-family: BMJUA;
+    }
+    
+    .MakeBoard_writer_box{
+        width: max-content;
+        height: max-content;
+        line-height: 40px;
+        font-size: 15px;
+        vertical-align: middle;
+        background-color: #EEEAD8;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .MakeBoard_content_box{
+        width: 250px;
+        height: 80px;
+        background-color: #EEEAD8;
+        font-family: BMJUA;
+    }
+    
+    .MakeBoard_span2{
+        width: 70%;
+        font-size: 13px;
+        display: block;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0;
+        font-family: BMJUA;
+    }
+    .MakeBoard_region{
+        margin-top: 0;
+    }
+    
+    .MakeBoard_Input{
+        margin-left: 15%;
+        background-color: #EEEAD8;
+        border-radius: 5px 5px 5px 5px;
+        font-family: BMJUA;
+    }
+    
+    .MakeBoard_Submit_btn{
+        width: 80px;
+        height: 40px;
+        margin-top: 30px;
+        background-color: #4c4837;
+        color: white;
+        font-family: BMJUA;
+    }   
+    .MakeBoard_Submit_btn:hover{
+        background-color: #EEEAD8;
+        color: white;
+    }
+}

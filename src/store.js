@@ -1,7 +1,5 @@
 import { createStore } from "redux";
 
-// Google 로그인 관련
-import { auth } from './firebase_config';
 
 const UPDATE = "UPDATE";
 

@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './MakeBoard.css';
+import swal from 'sweetalert';
+
 // redux 관련 import
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
@@ -17,6 +19,8 @@ function MakeBoard(props) {
     const [positionvalue, setpositionvalue] = useState('none');
     const [titlevalue, settitlevalue] = useState('');
     const [contentvalue, setcontentvalue] = useState('');
+    const [numbervalue, setnumbervalue] = useState('');
+
     let year = today.getFullYear();
     let month = today.getMonth() + 1;
     let date = today.getDate();
@@ -33,6 +37,9 @@ function MakeBoard(props) {
     const selectPositionValueChange = (e) => {
         setpositionvalue(e.target.value);
     }
+    const handleNumberChange = (e) => {
+        setnumbervalue(e.target.value);
+    }
     // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 
 
@@ -40,19 +47,34 @@ function MakeBoard(props) {
         e.preventDefault();
         settitlevalue('');
         setcontentvalue('');
-        firebase.database().ref().child(`boards`).push({
-            writer: auth.currentUser.displayName,
-            region: regionvalue,
-            position: positionvalue,
-            title: titlevalue,
-            content: contentvalue,
-            email: auth.currentUser.email,
-            day : `${year}/${month}/${date}`,
-            likePeople : [auth.currentUser.email],
-
-        })
-        history.push('/');
+        if(regionvalue === 'none') alert("지역을 선택해주세요.");
+        else if(positionvalue === 'none') alert("직무를 선택해주세요.");
+        else if(titlevalue === null || titlevalue === '') alert("제목을 입력해주세요.");
+        else if(contentvalue === null || contentvalue === '') alert("내용을 작성해주세요.");
+        else if(numbervalue === null) alert("빠른 모집을 위해 연락처나 카카오톡을 작성해주세요.");
+        else{
+            firebase.database().ref().child(`boards`).push({
+                writer: auth.currentUser.displayName,
+                region: regionvalue,
+                position: positionvalue,
+                title: titlevalue,
+                content: contentvalue,
+                email: auth.currentUser.email,
+                number: numbervalue,
+                day : `${year}/${month}/${date}`,
+                likePeople : ['Default'], // 기본 배열 값이 있어야 배열이 생성되더라..
+    
+            })
+            history.push('/');
+        }   
+        
     }
+
+    const numberQimgClick = () => {
+        swal("연락할 수단을 입력해주세요!", "보다 신속한 진행을 위하여 개인의 연락처나 카카오톡ID 혹은 오픈채팅방 링크를 통해 많은 사용자와 교류를 가져 보세요!")
+    }
+
+
 
 
     return (
@@ -65,7 +87,7 @@ function MakeBoard(props) {
                     </div>
                     
 
-                    <p className="MakeBoard_span2">지역</p>
+                    <p className="MakeBoard_span2 MakeBoard_region">지역</p>
                     <select className="MakeBoard_Input" onChange={selectRegionValueChange} name="region" >
                         <option value="none">선택</option>
                         <option value="서울">서울</option>
@@ -98,14 +120,17 @@ function MakeBoard(props) {
                     </select>
 
                     <p className="MakeBoard_span2">날짜</p>
-                    <span className="MakeBoard_Input MakeBoard_title_box">{year}.{month}.{date}</span>
+                    <span className="MakeBoard_Input ">{year}.{month}.{date}</span>
 
                     <p className="MakeBoard_span2">제목</p>
                     <input className="MakeBoard_Input MakeBoard_title_box" value={titlevalue} onChange={handleTitleChange}></input>
 
                     <p className="MakeBoard_span2">모집 내용</p>
                     <textarea className="MakeBoard_Input MakeBoard_content_box" value={contentvalue} onChange={handleContentChange}></textarea>
-                    
+
+                    <p className="MakeBoard_span2">연락수단<span className="Qimg" onClick={numberQimgClick}></span></p> 
+                    <input className="MakeBoard_Input MakeBoard_number_box" value={numbervalue} onChange={handleNumberChange}></input>
+
                     <button className="MakeBoard_Submit_btn" onClick={handleSubmit}>등록하기</button>
                 </div>
             </div>
