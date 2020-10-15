@@ -11,9 +11,7 @@
     font-family: BMJUA;
     src: url('../Fonts/BMJUA_ttf.7dbe95a7.7dbe95a7.ttf');
   }
-.Board_item_Content_span{
-    font-size: 20px;
-}
+
 @media (min-width: 1601px){
     
     .Board_item_Box{
@@ -63,6 +61,15 @@
     .Board_item_Content_show:hover{
         cursor: pointer;
     }
+    .Board_item_header_line{
+        display: inline-block;
+        text-align: left;
+        width: 750px;
+        font-weight: 900;
+    }
+    .Board_item_header_item{
+        margin-bottom: 0;
+    }
     .Board_item_line{
         display: inline-block;
         background-image: url('../Images/BoardItemBottom.png');
@@ -74,12 +81,6 @@
         margin-bottom: 3px;
         line-height: 172px;
         vertical-align: middle;
-    }
-
-
-
-    .Board_item{
-        font-weight: bold;
     }
     .Board_item_more{
         display: inline-block;
@@ -100,11 +101,10 @@
     .title_box{
         display: inline-block;
         width: 50%;
-        font-size: 18px;
         line-height: 120px;
         vertical-align: middle;
         text-align: left;
-        font-size: 25px;
+        font-size: 20px;
     }
     .title_box:hover{
         cursor: pointer;
@@ -148,7 +148,7 @@
         background-color: #4c4837;
     }
     .content_box{
-        width: 600px;
+        width: 700px;
         height: 180px;
         text-align: left;
         margin-left: auto;

@@ -26,10 +26,14 @@
     .SeeMoreBtn:hover{
         color: black;
     }
+
+    /* 지역, 포지션 선택하는 select문 */
     .Board_select_btn{
         font-family: 'Courier New', Courier, monospace;
         outline: 0;
         height: 25px;
+        background-color: #5f5b4a;
+        color: white;
     }
     /*검색하기, 초기화 */
     .Boards_select_Btn{

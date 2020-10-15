@@ -1,3 +1,10 @@
+
+  @font-face{
+    font-family: BMJUA;
+    src: url('../Fonts/BMJUA_ttf.7dbe95a7.7dbe95a7.ttf');
+  }
+
+
 .NoDataP{
     font-size: 25px;
     width: max-content;
@@ -14,6 +21,7 @@
     margin-right: 10px;
     font-size: 20px;
     color: rgb(124, 68, 58);
+    font-family: BMJUA;
 }
 .MyPage_linkitem:hover{
     color: rgb(124, 68, 58);
@@ -25,7 +33,8 @@
     margin-right: 10px;
     font-size: 20px;
     color: brown;
-    border-bottom: thin solid rgb(114, 65, 53);
+    border-bottom: thick solid rgb(114, 65, 53);
+    font-family: BMJUA;
 }
 .OnPage1:hover{
     color: brown;
@@ -35,7 +44,8 @@
     margin-right: 10px;
     font-size: 20px;
     color: brown;
-    border-bottom: thin solid  rgb(114, 65, 53);
+    border-bottom: thick solid  rgb(114, 65, 53);
+    font-family: BMJUA;
 }
 .OnPage2:hover{
     color: brown;

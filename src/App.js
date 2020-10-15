@@ -17,7 +17,7 @@ import { actionCreators } from './store';
 
 
 // router 관련
-import { BrowserRouter as Router, Route, Link, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Board from './UtilComponent/Board';
 import MakeBoard from './PageComponent/MakeBoard';
 import MyPage from './PageComponent/MyPage';
@@ -25,7 +25,6 @@ import MyPage from './PageComponent/MyPage';
 
 function App(props) {
 
-  let history = useHistory();
 
   /* 모바일 버전 햄버거 메뉴 관련 */
   const [anchorEl, setAnchorEl] = React.useState(null);

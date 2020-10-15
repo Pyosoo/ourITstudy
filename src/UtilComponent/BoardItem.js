@@ -5,7 +5,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Modal } from 'antd';
 import 'antd/dist/antd.css';
-import BoardItemPage from './BoardItemPage';
 
 // redux 관련 import
 import { connect } from 'react-redux';
@@ -13,7 +12,6 @@ import { actionCreators } from '../store';
 
 import firebase from 'firebase';
 import { auth } from '../firebase_config';
-import { render } from '@testing-library/react';
 let database = firebase.database();
 
 
@@ -22,9 +20,10 @@ function BoardItem(props) {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [visible, setvisible] = useState(false);
+    const [like, setlike] = useState('☆');
     const [newtitle, setnewtitle] = useState(props.title);
     const [newcontent, setnewcontent] = useState(props.content);
-    const [like, setlike] = useState('☆');
+    const [newnumber, setnewnumber] = useState(props.number);
    
 
     const handleClick = (event) => {
@@ -90,6 +89,9 @@ function BoardItem(props) {
     }
     const handleNewContentChange = e => {
         setnewcontent(e.target.value);
+    }
+    const handleNewNumberChange = e => {
+        setnewnumber(e.terget.value);
     }
 
     const handleChangeLike = e => {
@@ -177,14 +179,19 @@ function BoardItem(props) {
             >
                 <p className="newheader">제목</p>
                 <input className="newtitle_box" value={newtitle} placeholder={props.title} onChange={handleNewTitleChange}></input>
-                <p className="newheader newheader2">내용</p>
+                <p className="newheader2">내용</p>
                 <textarea className="newcontent_box" value={newcontent} placeholder={props.content} onChange={handleNewContentChange}></textarea>
+                <p className="newheader3">연락수단</p>
+                <input className="newnumber_box" value={newnumber} placeholder={props.number} onChange={handleNewNumberChange}></input>           
             </Modal>
 
             <div className="Board_item_Top"></div> {/* 두루마리의 맨위 기둥 이미지 */}
             <div className={BoarditemContentDP} onClick={ShowContent}>
-                <span className="Board_item writer_box Board_item_Content_span">작성자 : {props.writer}</span> <span className="number_box">연락처 : {props.number}</span> <br />
-                <span className="Board_item date_box Board_item_Content_span">일시 : {props.day}</span> <br/>
+                <div className="Board_item_header_line"> 
+                    <p className="Board_item_header_item Board_item_header_writer">작성자 : {props.writer}</p> 
+                    <p className="Board_item_header_item Board_item_header_date">일시 : {props.day}</p>
+                    <p className="Board_item_header_item Board_item_header_number">연락처 : {props.number}</p>
+                </div>
                 <p className="Board_item content_box Board_item_Content_span">{props.content}</p> <br />
             </div>
             <div className="Board_item_line">
