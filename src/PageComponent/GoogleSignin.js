@@ -40,6 +40,7 @@ function GoogleSignin(props){
         <div className="Login_ImageBox"></div>
         <button onClick={signInWithGoogle} className="Google_Login_Btn Login_Btn"></button>
         <button onClick={signInWithGithub} className="Github_Login_Btn Login_Btn"></button>
+        <p className="Login_p">이 사이트는 Google Chrome 환경에서만 지원합니다.</p>
       </div>
     )
   }
