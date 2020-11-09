@@ -18,10 +18,10 @@ function GoogleSignin(props){
   const signInWithGithub = () => {
     firebase.auth().signInWithPopup(provider).then(function(result) {
       let user = result.user;
-      console.log(user);
+     // console.log(user);
       // ...
     }).catch(function(error) {
-      console.log(error);
+     // console.log(error);
     });
   }
  
@@ -30,7 +30,7 @@ function GoogleSignin(props){
     auth.onAuthStateChanged(user => {
       if(user != null){
         props.updateState(auth.currentUser, props.StoreData.fromDatabase);
-        console.log(auth.currentUser);
+       // console.log(auth.currentUser);
       }
     })
    

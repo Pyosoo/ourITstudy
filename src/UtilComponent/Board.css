@@ -10,11 +10,12 @@
         text-align: center;
     }
     .Board_Header{
-        display: block;
-        height: 50px;
-        padding-top: 10px;
+        display: flex;
+        padding-top: 20px;
+        padding-bottom: 20px;
         background-color:  transparent;
         text-align: center;
+        justify-content: center;
     }
     .SeeMoreBtn{
         margin-left: auto;
@@ -28,25 +29,38 @@
     }
 
     /* 지역, 포지션 선택하는 select문 */
+    .Boards_select_div{
+        height: max-content;
+        border-style: solid;
+        border-width: 6px;
+        border-color: rgb(42, 92, 145);
+    }
     .Board_select_btn{
         font-family: 'Courier New', Courier, monospace;
         outline: 0;
-        height: 25px;
-        background-color: #5f5b4a;
-        color: white;
+        width: 250px;
+        height: 50px;
+        background-color: rgb(227, 227, 252);
     }
     /*검색하기, 초기화 */
-    .Boards_select_Btn{
-        background-color:  #4c4837;
-        color: white;
-        padding-left: 17px;
-        padding-right: 17px;
-        outline: 0;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    .Boards_select_Btn1{
+        font-size: 12px;
+        margin-top: 50px;
+        margin-left: 5px;
+        color: gray;
     }
-    .Boards_select_Btn:hover{
-        background-color: #EEEAD8;
-        color: black;
+    .Boards_select_Btn2{
+        width: 64px;
+        height: 64px;
+        margin-left: -15px;
+        margin-top: 20px;
+    }
+    .Boards_select_Btn2:hover, .Boards_select_Btn1:hover{
+        cursor: pointer;
+    }
+
+    .Boards_select_Btn:hover, .Board_select_btn:hover{
+        cursor: pointer;
     }
 }
 @media (min-width: 1024px) and (max-width: 1600px){
@@ -61,11 +75,12 @@
         text-align: center;
     }
     .Board_Header{
-        display: block;
-        height: 50px;
-        padding-top: 10px;
+        display: flex;
+        padding-top: 20px;
+        padding-bottom: 20px;
         background-color:  transparent;
         text-align: center;
+        justify-content: center;
     }
     .SeeMoreBtn{
         margin-left: auto;
@@ -77,18 +92,40 @@
     .SeeMoreBtn:hover{
         color: black;
     }
-    /*검색하기, 초기화 */
-    .Boards_select_Btn{
-        background-color:  #4c4837;
-        color: white;
-        outline: 0;
-        padding-left: 17px;
-        padding-right: 17px;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    /* 지역, 포지션 선택하는 select문 */
+    .Boards_select_div{
+        height: max-content;
+        border-style: solid;
+        border-width: 6px;
+        border-color: rgb(42, 92, 145);
     }
-    .Boards_select_Btn:hover{
-        background-color: #EEEAD8;
-        color: black;
+    .Board_select_btn{
+        font-family: 'Courier New', Courier, monospace;
+        outline: 0;
+        width: 250px;
+        height: 50px;
+        background-color: rgb(227, 227, 252);
+    }
+    /*검색하기, 초기화 */
+    .Boards_select_Btn1{
+        font-size: 12px;
+        margin-top: 50px;
+        margin-left: 5px;
+        color: gray;
+    }
+    .Boards_select_Btn2{
+        width: 64px;
+        height: 64px;
+        margin-left: -15px;
+        margin-top: 20px;
+    }
+    .Boards_select_Btn2:hover, .Boards_select_Btn1:hover{
+        cursor: pointer;
+    }
+
+    .Boards_select_Btn:hover, .Board_select_btn:hover{
+        cursor: pointer;
     }
 }
 

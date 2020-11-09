@@ -188,9 +188,9 @@ function BoardItem(props) {
             <div className="Board_item_Top"></div> {/* 두루마리의 맨위 기둥 이미지 */}
             <div className={BoarditemContentDP} onClick={ShowContent}>
                 <div className="Board_item_header_line"> 
-                    <p className="Board_item_header_item Board_item_header_writer">작성자 : {props.writer}</p> 
-                    <p className="Board_item_header_item Board_item_header_date">일시 : {props.day}</p>
-                    <p className="Board_item_header_item Board_item_header_number">연락처 : {props.number}</p>
+                    <p className="Board_item_header_item "><span className="Board_item_header_span">작성자</span> : {props.writer}</p> 
+                    <p className="Board_item_header_item "><span className="Board_item_header_span">일시 </span>: {props.day}</p>
+                    <p className="Board_item_header_item "><span className="Board_item_header_span">연락처</span> : {props.number}</p>
                 </div>
                 <p className="Board_item content_box Board_item_Content_span">{props.content}</p> <br />
             </div>

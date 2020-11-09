@@ -5,7 +5,7 @@ const UPDATE = "UPDATE";
 
 //2. action 객체를 생성해 놓는다.
 const updateState = (status, Data) => {
-    console.log("updatestate실행")
+   // console.log("updatestate실행")
     return{
         type: UPDATE,
         status,

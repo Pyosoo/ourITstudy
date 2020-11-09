@@ -39,8 +39,8 @@ function App(props) {
 
 
   useEffect(() => {
-    console.log("APP.js의 useEffect실행")
-    console.log(`store의 LoginStatus = ${props.StoreData.LoginStatus}`)
+    //console.log("APP.js의 useEffect실행")
+    //console.log(`store의 LoginStatus = ${props.StoreData.LoginStatus}`)
   }, [props.StoreData.LoginStatus]);
 
 
@@ -53,10 +53,10 @@ function App(props) {
       <Router>
         <div className="NavibarRouter">
           <button className="logoutBtn" onClick={() => {
-            console.log(props.StoreData.LoginStatus);
+            //console.log(props.StoreData.LoginStatus);
             auth.signOut();
             props.updateState(false, props.StoreData.fromDatabase);
-            console.log(props.StoreData.LoginStatus);
+            //console.log(props.StoreData.LoginStatus);
           }}>EXIT</button>
           <Link className="logo_img" to="/">
             <img alt={1} src={ourstudylogo} className="logo_img"/>

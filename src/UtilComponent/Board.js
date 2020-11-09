@@ -10,6 +10,10 @@ import BoardItem from './BoardItem';
 // firebase 관련
 import firebase from 'firebase';
 
+// Image 관련
+import refreshImg from '../Images/refresh.png';
+import searchImg from '../Images/search.png';
+
 let database = firebase.database();
 
 
@@ -20,13 +24,14 @@ function Board(props) {
 
     // 현재 firebase DB에 있는 정보가져와서 fromDB에 옮기고 store(fromDatabase)에 저장
     const [fromDB, setfromDB] = useState([]);
+    const [currentDB, setcurrentDB] = useState([]);
     const [listitemTag, setlistitemTag] = useState([]);
     const [limit, setlimit] = useState(8);
     const [DPlimitBtn, setDPlimitBtn] = useState('block');
     const [MoreDP, setMoreDP] = useState('');
     
-    const [region, setregion] = useState(null);
-    const [position, setposition] = useState(null);
+    const [region, setregion] = useState('none');
+    const [position, setposition] = useState('none');
 
 
     let showitemlist = [];
@@ -46,6 +51,7 @@ function Board(props) {
             }
             list = list.reverse();
             setfromDB(list);
+            setcurrentDB(list);
             if(list.length < 8) setMoreDP('none')
             for (let i = 0; i < (list.length < limit ? list.length : limit); i++) {
                // console.log(`현재글의 이메일:${list[i].email} , 로그인된이메일:${auth.currentUser.email}`)
@@ -69,14 +75,18 @@ function Board(props) {
             setlistitemTag(showitemlist);
             props.updateState(props.StoreData.LoginStatus, list);
         })
+        setregion('none');
+        setposition('none');
     }
 
     const getDataOnSelect = () => {
+        console.log(`region : ${region}`);
+        console.log(`position : ${position}`)
         let temp = [];
-        if(region === null && position === null){
+        if(region === 'none' && position === 'none'){
             alert("지역 혹은 직무를 선택해주세요")
         }
-        else if(region === null && position !== null){ // position만 선택했을 때
+        else if(region === 'none' && position !== 'none'){ // position만 선택했을 때
             let tempIndexForKey = 0;
             fromDB.forEach(data=>{
                 if(data.position === position){
@@ -103,7 +113,7 @@ function Board(props) {
             setlistitemTag(temp);
             setMoreDP('none');
         }
-        else if(region !== null && position === null){ // region만 선택했을때
+        else if(region !== 'none' && position === 'none'){ // region만 선택했을때
             let tempIndexForKey = 0;
             fromDB.forEach(data=>{
                 if(data.region === region){
@@ -131,7 +141,7 @@ function Board(props) {
             setlistitemTag(temp);
             setMoreDP('none');
         }
-        else if(region !== null && position !== null){
+        else if(region !== 'none' && position !== 'none'){
             let tempIndexForKey = 0;
             fromDB.forEach(data => {
                 if(data.region === region && data.position === position){
@@ -157,40 +167,49 @@ function Board(props) {
             setlistitemTag(temp);
             setMoreDP('none');
         }
-        
+        setcurrentDB(temp);
     }
 
-    // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● 더보기 클릭시 ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 
-    
+   // infinite scroll 실행시  
     const limitplus = () => {
-        console.log(`limitplus 실행! limit ${limit} => ${limit + 8}`)
+        //console.log(`${limit} , ${currentDB.length}`)
+        let curLimit = limit;
+        if(limit < currentDB.length && limit + 8 < currentDB.length){
+            //console.log(`limit : ${limit}  currentDB.length : ${currentDB.length}  이고 옵션 1실행`)
+            curLimit = limit+8;
+        }
+        else if(limit < currentDB.length && limit + 8 > currentDB.length){
+            //console.log(`limit : ${limit}  currentDB.length : ${currentDB.length}  이고 옵션 2실행`)
+            curLimit = currentDB.length;
+        }
+        if(limit > currentDB.length) return;    // 초기에 limit 8인데 selectedOption한 data가 길이가 8보다 짧을때를 대비..
+
         let tempIndexForKey = 0;
         showitemlist = [];
-        for(let i=0; i<limit+8; i++){
-            if(fromDB[i] !== undefined){
+        for(let i=0; i<curLimit; i++){
+            if(currentDB[i] !== undefined){
                 showitemlist.push(
                     <BoardItem 
                             key={tempIndexForKey++}
-                            email={fromDB[i].email} 
-                            id={fromDB[i].id} 
-                            writer={fromDB[i].writer} 
+                            email={currentDB[i].email} 
+                            id={currentDB[i].id} 
+                            writer={currentDB[i].writer} 
                             title={fromDB[i].title} 
-                            content={fromDB[i].content} 
-                            position={fromDB[i].position} 
-                            region={fromDB[i].region} 
+                            content={currentDB[i].content} 
+                            position={currentDB[i].position} 
+                            region={currentDB[i].region} 
                             mine="no"
-                            likePeople={fromDB[i].likePeople}
-                            day={fromDB[i].day}
+                            likePeople={currentDB[i].likePeople}
+                            number={currentDB[i].number}
+                            day={currentDB[i].day}
                             />
                 )
             }
         }
         setlistitemTag(showitemlist);
-        if (limit+8 >= fromDB.length) {
-            setDPlimitBtn('none');
-            setlimit(limit + 8);
-        }
+        setlimit(curLimit);
+        setMoreDP('none')
     }
     // ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●
 
@@ -223,7 +242,7 @@ function Board(props) {
         };
       });
     useEffect(() => {
-        console.log("Boards의 useEffect 실행");
+      //  console.log("Boards의 useEffect 실행");
         getData();
     },[])
     
@@ -233,36 +252,38 @@ function Board(props) {
     return (
         <div className="Boards_Total_Container">
             <div className="Board_Header">
-                <select className="Board_select_btn" onChange={selectRegion} name="region" >
-                    <option value="none">지역</option>
-                    <option value="서울">서울</option>
-                    <option value="수원">수원</option>
-                    <option value="인천">인천</option>
-                    <option value="대구">대구</option>
-                    <option value="부산">부산</option>
-                    <option value="울산">울산</option>
-                    <option value="광주">광주</option>
-                    <option value="전주">전주</option>
-                    <option value="대전">대전</option>
-                    <option value="세종">세종</option>
-                    <option value="천안">천안</option>
-                    <option value="청주">청주</option>
-                    <option value="원주">원주</option>
-                    <option value="춘천">춘천</option>
-                    <option value="제주">제주</option>
-                    <option value="기타">기타</option>
-                </select>
-                <select className="Board_select_btn" onChange={selectPosition} name="position" >
-                    <option value="none">포지션</option>
-                    <option value="기획자">기획자</option>
-                    <option value="디자인">디자인</option>
-                    <option value="프론트엔드">프론트엔드</option>
-                    <option value="백엔드">백엔드</option>
-                    <option value="풀스택">풀스택</option>
-                    <option value="프로젝트매니저">프로젝트매니저</option>
-                </select><br/>
-                <button className="Boards_select_Btn" onClick={getDataOnSelect}>검색하기</button>
-                <button className="Boards_select_Btn" onClick={getData}>초기화</button>
+                <div className="Boards_select_div">
+                    <select className="Board_select_btn" onChange={selectRegion} name="region" value={region}>
+                        <option value="none">지역</option>
+                        <option value="서울">서울</option>
+                        <option value="수원">수원</option>
+                        <option value="인천">인천</option>
+                        <option value="대구">대구</option>
+                        <option value="부산">부산</option>
+                        <option value="울산">울산</option>
+                        <option value="광주">광주</option>
+                        <option value="전주">전주</option>
+                        <option value="대전">대전</option>
+                        <option value="세종">세종</option>
+                        <option value="천안">천안</option>
+                        <option value="청주">청주</option>
+                        <option value="원주">원주</option>
+                        <option value="춘천">춘천</option>
+                        <option value="제주">제주</option>
+                        <option value="기타">기타</option>
+                    </select>
+                    <select className="Board_select_btn" onChange={selectPosition} name="position" value={position}>
+                        <option value="none">포지션</option>
+                        <option value="기획자">기획자</option>
+                        <option value="디자인">디자인</option>
+                        <option value="프론트엔드">프론트엔드</option>
+                        <option value="백엔드">백엔드</option>
+                        <option value="풀스택">풀스택</option>
+                        <option value="프로젝트매니저">프로젝트매니저</option>
+                    </select>
+                </div>
+                <img className="Boards_select_Btn2" onClick={getDataOnSelect} src={searchImg} />
+                <p className="Boards_select_Btn1" onClick={getData}>검색초기화</p>
             </div>
             <div className="Boards_Box">
                 {listitemTag}

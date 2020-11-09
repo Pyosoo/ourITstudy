@@ -62,10 +62,10 @@
         cursor: pointer;
     }
     .Board_item_header_line{
-        display: inline-block;
+        display: flex;
         text-align: left;
+        justify-content: center;
         width: 750px;
-        font-weight: 900;
     }
     .Board_item_header_item{
         margin-bottom: 0;
@@ -81,6 +81,10 @@
         margin-bottom: 3px;
         line-height: 172px;
         vertical-align: middle;
+    }
+    .Board_item_header_span{
+        font-size: 17px;
+        font-weight: bold;
     }
     .Board_item_more{
         display: inline-block;
@@ -244,6 +248,12 @@
     }
     .Board_item_Content_show:hover{
         cursor: pointer;
+    }
+    .Board_item_header_line{
+        display: flex;
+        text-align: left;
+        justify-content: center;
+        width: 750px;
     }
     .Board_item_line{
         display: inline-block;
