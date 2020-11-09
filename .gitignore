@@ -7,9 +7,9 @@
 
 # firebase information
 src/firebase_config.js
-/.firebaserc
-/firebase.json
-/database.rules.json
+.firebaserc
+firebase.json
+database.rules.json
 
 # testing
 /coverage
