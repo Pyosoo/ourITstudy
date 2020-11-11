@@ -21,6 +21,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Board from './UtilComponent/Board';
 import MakeBoard from './PageComponent/MakeBoard';
 import MyPage from './PageComponent/MyPage';
+import BoardItemInfo from './UtilComponent/BoardItemInfo';
 
 
 function App(props) {
@@ -95,6 +96,7 @@ function App(props) {
           <Route exact path="/" render={() => <Board />} />
           <Route path="/write" render={() => <MakeBoard />} />
           <Route path="/mypage" render={() => <MyPage />} />
+          <Route path="/info" render={() => <BoardItemInfo />} />
         </div>
       </Router>
     )

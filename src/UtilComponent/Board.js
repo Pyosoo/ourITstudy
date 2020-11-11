@@ -57,9 +57,10 @@ function Board(props) {
                // console.log(`현재글의 이메일:${list[i].email} , 로그인된이메일:${auth.currentUser.email}`)
                // if(list[i].email === auth.currentUser.email) console.log("같다")
                // else console.log("다르다")
-                
+                //console.log(list[i]);
                 showitemlist.push(
-                    <BoardItem key={i} 
+                    <BoardItem 
+                        key={i} 
                         email={list[i].email} 
                         id={list[i].id} 
                         writer={list[i].writer} 

@@ -1,0 +1,43 @@
+.BoardItemInfo_back{
+    width: 960px;
+    height: 700px;
+    background-color: rgb(223, 223, 193);
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    border-color: black;
+}
+
+/* 기존 의 글 관련 div */
+.BoardItemInfo_title{
+    font-size: 25px;
+    text-align: center;
+}
+.BoardItemInfo_header{
+    display: block;
+    border-style: solid;
+}
+.BoardItemInfo_header p{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.BoardItemInfo_content{
+    height: 220px;
+}
+.BoardItemInfo_review{
+    bottom: 0;
+    width: 100%;
+    height: 300px;
+    border-style: solid;
+}
+
+
+/* Review 관련 */
+.Review_input{
+    width: 80%;
+    height: 60px;
+}
+.Review_registerBtn{
+    width: 20%;
+    height: 60px;
+}

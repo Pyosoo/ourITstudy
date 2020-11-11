@@ -12,19 +12,32 @@ import { actionCreators } from '../store';
 
 import firebase from 'firebase';
 import { auth } from '../firebase_config';
+import { useHistory } from 'react-router-dom';
 let database = firebase.database();
-
 
 
 function BoardItem(props) {
 
+    let history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [visible, setvisible] = useState(false);
     const [like, setlike] = useState('☆');
     const [newtitle, setnewtitle] = useState(props.title);
     const [newcontent, setnewcontent] = useState(props.content);
     const [newnumber, setnewnumber] = useState(props.number);
-   
+    let Item = {
+        id : props.id,
+        email : props.email,
+        writer : props.writer,
+        title : props.title,
+        content : props.content,
+        position : props.position,
+        region : props.region,
+        mine : props.mine,
+        likePeople : props.likePeople,
+        number : props.number,
+        day : props.day
+    }
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -191,6 +204,14 @@ function BoardItem(props) {
                     <p className="Board_item_header_item "><span className="Board_item_header_span">작성자</span> : {props.writer}</p> 
                     <p className="Board_item_header_item "><span className="Board_item_header_span">일시 </span>: {props.day}</p>
                     <p className="Board_item_header_item "><span className="Board_item_header_span">연락처</span> : {props.number}</p>
+                    <button className="Board_item_header_item " onClick={
+                        ()=>{
+                            history.push({
+                                pathname: "/info",
+                                state : {ItemInfo : Item}
+                            })
+                        }
+                    }>자세히보기</button>
                 </div>
                 <p className="Board_item content_box Board_item_Content_span">{props.content}</p> <br />
             </div>
@@ -199,7 +220,7 @@ function BoardItem(props) {
                 <div className="Board_item region_box">{props.region}</div>
                 <div className="Board_item position_box">{props.position}</div>
                 <img alt="2" className="mine_menu" style={{ display: mine === "yes" ? 'inline-block' : 'none' }} src={menu} onClick={handleClick} />
-                <span className="Board_item_like" onClick={handleChangeLike}> {like} </span>
+                <span className="Board_item_like" onClick={handleChangeLike}> {like} <span className="like_number">x{props.likePeople.length}</span></span>
             </div>
 
             
