@@ -1,43 +1,91 @@
+@font-face {
+    font-family: BMJ;
+    src: url('../Fonts/BMJUA_ttf.7dbe95a7.7dbe95a7.ttf');
+  }
+
 .BoardItemInfo_back{
+    margin-top: 60px;
     width: 960px;
     height: 700px;
     background-color: rgb(223, 223, 193);
     margin-left: auto;
     margin-right: auto;
     border-style: solid;
-    border-color: black;
+    border-color: #4c4837;
+    border-width: 5px;
 }
 
 /* 기존 의 글 관련 div */
 .BoardItemInfo_title{
     font-size: 25px;
     text-align: center;
+    font-family: BMJ;
+    background-color: #4c4837;
+    color: white;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 .BoardItemInfo_header{
     display: block;
+    border-width: 0 0 3px 0;
     border-style: solid;
+    border-color: #4c4837;
+    background-color: #4c4837;
+    color: white;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 .BoardItemInfo_header p{
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 .BoardItemInfo_content{
     height: 220px;
+    overflow-y: auto;
 }
 .BoardItemInfo_review{
     bottom: 0;
     width: 100%;
     height: 300px;
-    border-style: solid;
+    overflow-y: auto;
 }
 
 
 /* Review 관련 */
 .Review_input{
     width: 80%;
-    height: 60px;
+    height: 40px;
 }
 .Review_registerBtn{
     width: 20%;
-    height: 60px;
+    height: 40px;
+}
+.Review_line{
+    display: flex;
+    height: 30px;
+    border-width: 0 0 2px 0;
+    border-style: dotted;
+    border-color: gray;
+}
+.Review_what{
+    width: 80%;
+    height: 30px;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+.Review_who{
+    width: 20%;
+    height: 30px;
+    vertical-align: middle;
+}
+.Review_delete{
+    width: 16px;
+    height: 16px;
+    margin-left: -16px;
+    background-image: url('../Images/trash.png');
+}
+.Review_delete:hover{
+    cursor: pointer;
 }

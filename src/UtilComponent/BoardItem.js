@@ -204,7 +204,7 @@ function BoardItem(props) {
                     <p className="Board_item_header_item "><span className="Board_item_header_span">작성자</span> : {props.writer}</p> 
                     <p className="Board_item_header_item "><span className="Board_item_header_span">일시 </span>: {props.day}</p>
                     <p className="Board_item_header_item "><span className="Board_item_header_span">연락처</span> : {props.number}</p>
-                    <button className="Board_item_header_item " onClick={
+                    <button className="Board_item_header_item Board_item_SeeMore" onClick={
                         ()=>{
                             history.push({
                                 pathname: "/info",

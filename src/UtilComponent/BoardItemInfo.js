@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './BoardItemInfo.css';
 import firebase from 'firebase';
-
+import { auth } from '../firebase_config';
+import trash from '../Images/trash.png';
 
 let temp = [];
 function BoardItemInfo(props){
@@ -22,12 +23,26 @@ function BoardItemInfo(props){
         setreview(e.target.value);
     }
     const AddReview = () => {
-        let newReivewArr = [...ItemReview, review];
-        temp = [...temp, review];
-        let ReviewItem = newReivewArr.map(data => <p>{data}</p>)
+        // 기존의 ItemReview에 새로 입력한 댓글을 추가하기
+        let newItemReview = [...ItemReview, {who:auth.currentUser.email, what:review}];
+        // WillUnmount에서 저장하기 위해 별도로 저장한번 더
+        temp = [...temp, {who:auth.currentUser.email, what:review}];
+
+        // HTML에 보여질 요소로 만들어 주기
+        let ReviewItem = newItemReview.map((data,index) =>
+            <div className="Review_line" key={index}>
+                <p className="Review_what">{data.what}</p>
+                <p className="Review_who">{data.who}</p>
+            </div>
+        )
         setshowReview(ReviewItem);
-        setItemReview(newReivewArr)
+        setItemReview(newItemReview)
         setreview('');
+        let newItemInfo = {...ItemInfo, reply : temp}
+        database.ref().child('boards').child(ItemInfo.id).set(
+            newItemInfo
+         );
+         temp = [];
     }
 
 
@@ -38,12 +53,12 @@ function BoardItemInfo(props){
 
     useEffect(()=>{
         reference.on('value', snapshot => {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             let Data;
             for(let key in snapshot.val().boards){
                 if(key === ItemInfo.id){
                     Data = snapshot.val().boards[key]
-                    console.log(snapshot.val().boards[key])
+                    //console.log(snapshot.val().boards[key])
                     break;
                 }
             }
@@ -51,7 +66,28 @@ function BoardItemInfo(props){
                 console.log("아직 리뷰가 없습니다")
             }else{
                 temp = Data.reply;
-                let makeHTML = Data.reply.map(data => <p>{data}</p>)
+                let makeHTML = Data.reply.map((data, index) => {
+                    console.log(data.who + auth.currentUser.email)
+                    if(data.who === auth.currentUser.email){
+                        return (
+                            <div className="Review_line" key={index}>
+                                <p className="Review_what">{data.what}</p>
+                                <p className="Review_who">{data.who}</p>
+                                <img alt="" src={trash} className="Review_delete" />
+                            </div>
+                        )
+                    }
+                    else{
+                        return(
+                            <div className="Review_line" key={index}>
+                                <p className="Review_what">{data.what}</p>
+                                <p className="Review_who">{data.who}</p>
+                            </div>
+                        )
+                        
+                    }
+                }
+                )
                 setshowReview(makeHTML);
                 setItemReview(temp);
             }
@@ -59,7 +95,7 @@ function BoardItemInfo(props){
 
         return()=>{
             let newItemInfo = {...ItemInfo, reply : temp}
-            console.log(newItemInfo);
+           // console.log(newItemInfo);
           //    console.log(ItemReview); []로나오는 이유는 useEffect의 return에서의 props와 state는 초기 didmount때의 값을 가지고 있기때문이란다..
             database.ref().child('boards').child(ItemInfo.id).set(
                newItemInfo
@@ -73,11 +109,11 @@ function BoardItemInfo(props){
     
     return(
         <div className="BoardItemInfo_back">
-            <p className="BoardItemInfo_title">제목 : {ItemInfo.title}</p>
+            <p className="BoardItemInfo_title">{ItemInfo.title}</p>
             <div className="BoardItemInfo_header">
                 <p>작성자 : {ItemInfo.writer}</p>
                 <p>연락수단 : {ItemInfo.number}</p>
-                <p>채용 포지션 : {ItemInfo.position}</p>
+                <p>포지션 : {ItemInfo.position}</p>
                 <p>등록날짜 : {ItemInfo.day}</p>
             </div>
 
