@@ -61,6 +61,9 @@
 .Review_registerBtn{
     width: 20%;
     height: 40px;
+    background-color: #4c4837;
+    color: white;
+    outline: 0;
 }
 .Review_line{
     display: flex;
@@ -83,9 +86,16 @@
 .Review_delete{
     width: 16px;
     height: 16px;
-    margin-left: -16px;
-    background-image: url('../Images/trash.png');
+    margin-top: 5px;
 }
 .Review_delete:hover{
+    cursor: pointer;
+}
+.Review_update{
+    width: 16px;
+    height: 16px;
+    margin-top: 5px;
+}
+.Review_update:hover{
     cursor: pointer;
 }

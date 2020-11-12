@@ -4,6 +4,7 @@ import './BoardItemInfo.css';
 import firebase from 'firebase';
 import { auth } from '../firebase_config';
 import trash from '../Images/trash.png';
+import exchange from '../Images/exchange.png';
 
 let temp = [];
 let flag = false;
@@ -39,9 +40,7 @@ function BoardItemInfo(props) {
             setshowReview(ReviewItem);
             setreview('');
             let newItemInfo = { ...ItemInfo, reply: temp }
-            database.ref().child('boards').child(ItemInfo.id).set(
-                newItemInfo
-            );
+            database.ref().child('boards').child(ItemInfo.id).set(newItemInfo);
             flag = true;//여기서 데이터를 추가해버리면. 나갈때 다시 빈 배열로 초기화를 시켜버린다....
         }
     }
@@ -68,11 +67,15 @@ function BoardItemInfo(props) {
                 temp = [];
             }
             let newItemInfo = { ...ItemInfo, reply: Data.reply }
-            database.ref().child('boards').child(ItemInfo.id).set(
-                newItemInfo
-            );
+            database.ref().child('boards').child(ItemInfo.id).set(newItemInfo);
         }
-       
+    }
+
+    const UpdateReview = (_id) => {
+        let UpdatedReview = window.prompt('새로운 댓글을 입력해주세요.', "");
+        temp[_id].what = UpdatedReview;
+        let newItemInfo = { ...ItemInfo, reply: temp }
+            database.ref().child('boards').child(ItemInfo.id).set(newItemInfo);
     }
 
 
@@ -114,6 +117,7 @@ function BoardItemInfo(props) {
                                 <p className="Review_what">{data.what}</p>
                                 <p className="Review_who">{data.who}</p>
                                 <img id={index} alt="" src={trash} className="Review_delete" onClick={(e) => { DeleteReview(e.currentTarget.id) }} />
+                                <img id={index} alt="" src={exchange} className="Review_update" onClick={(e) => { UpdateReview(e.currentTarget.id) }} />
                             </div>
                         )
                     }
