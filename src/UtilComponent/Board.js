@@ -243,7 +243,7 @@ function Board(props) {
         };
       });
     useEffect(() => {
-      //  console.log("Boards의 useEffect 실행");
+        console.log("Boards의 useEffect 실행");
         getData();
     },[])
     

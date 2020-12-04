@@ -83,7 +83,7 @@ function MakeBoard(props) {
                 <div className="Boards_Container">
                     <div className="line1">
                         <span className="MakeBoard_span">작성자 : </span>
-                        <span className="MakeBoard_writer_box">{auth.currentUser.displayName}</span>
+                        <span className="MakeBoard_writer_box">{sessionStorage.getItem('id')}</span>
                     </div>
                     
 

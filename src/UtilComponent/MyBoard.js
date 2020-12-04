@@ -10,16 +10,16 @@ let database = firebase.database();
 
 function MyBoard() {
     const [listitem, setlistitem] = useState([]);
-
+    console.log('Myboard 실행')
    
 
     useEffect(() => {
         console.log("MyBoard의 useEffect 실행")
         let showlist = [];
         const getData = () => {
-            showlist=[];
             let reference = database.ref('/');
             reference.on('value', snapshot => {
+                showlist=[];
                 const data = snapshot.val();
                 for (let key in data) {
                     for (let key2 in data[key]) {

@@ -49,7 +49,7 @@ function BoardItem(props) {
         console.log(props);
         database.ref().child('boards').child(props.id).remove();
         alert("삭제되었습니다.");
-        window.location.replace("/");
+        history.replace('/myboard')
     };
     // 수정버튼 클릭하면
     const handleCloseAndUpdate = (e) => {
@@ -207,7 +207,7 @@ function BoardItem(props) {
                     <button className="Board_item_header_item Board_item_SeeMore" onClick={
                         ()=>{
                             history.push({
-                                pathname: "/info",
+                                pathname: "../../info",
                                 state : {ItemInfo : Item}
                             })
                         }

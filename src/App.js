@@ -22,6 +22,8 @@ import Board from './UtilComponent/Board';
 import MakeBoard from './PageComponent/MakeBoard';
 import MyPage from './PageComponent/MyPage';
 import BoardItemInfo from './UtilComponent/BoardItemInfo';
+import Scrap from './UtilComponent/Scrap';
+import MyBoard from './UtilComponent/MyBoard';
 
 
 function App(props) {
@@ -36,13 +38,6 @@ function App(props) {
     setAnchorEl(null);
   };
 
-  
-
-
-  useEffect(() => {
-    //console.log("APP.js의 useEffect실행")
-    //console.log(`store의 LoginStatus = ${props.StoreData.LoginStatus}`)
-  }, [props.StoreData.LoginStatus]);
 
 
   if (props.StoreData.LoginStatus === false || props.StoreData.LoginStatus === null || props.StoreData.LoginStatus === undefined) {
@@ -62,7 +57,7 @@ function App(props) {
           <Link className="logo_img" to="/">
             <img alt={1} src={ourstudylogo} className="logo_img"/>
           </Link>
-          <Link className="linkitem" to="/mypage">{props.StoreData.LoginStatus.displayName}님</Link>
+          <Link className="linkitem" to="/myboard">{sessionStorage.getItem('id')}님</Link>
           <Link className="linkitem" to="/write">Write</Link>
           <Link className="linkitem" to="/">Board</Link>
         </div>
@@ -95,7 +90,7 @@ function App(props) {
         <div id="boardwindow" className="ContentRouter">
           <Route exact path="/" render={() => <Board />} />
           <Route path="/write" render={() => <MakeBoard />} />
-          <Route path="/mypage" render={() => <MyPage />} />
+          <Route path="/myboard" render={() => <MyPage />} />
           <Route path="/info" render={() => <BoardItemInfo />} />
         </div>
       </Router>

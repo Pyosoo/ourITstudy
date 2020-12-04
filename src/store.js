@@ -1,5 +1,9 @@
 import { createStore } from "redux";
 
+let INITIAL_STATE = {
+    LoginStatus : sessionStorage.getItem('id') ? sessionStorage.getItem('id') : '',
+    fromDatabase : []
+}
 
 const UPDATE = "UPDATE";
 
@@ -14,7 +18,7 @@ const updateState = (status, Data) => {
 }
 
 //3. reducer를 생성한다. state와 action을 입력 받고 바뀐 결과 state를 return 한다.
-const reducer = (state = {LoginStatus : false, fromDatabase : []}, action) =>{
+const reducer = (state = INITIAL_STATE, action) =>{
     switch(action.type){
         case UPDATE:
             return {

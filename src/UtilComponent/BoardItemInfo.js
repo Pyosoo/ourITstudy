@@ -81,22 +81,13 @@ function BoardItemInfo(props) {
 
 
 
-
-
-
-
-
-
-
-
-
-
     // firebase 관련
 
     let database = firebase.database();
     let reference = database.ref(`/`);
 
     useEffect(() => {
+        temp = [];
         reference.on('value', snapshot => {
             let Data;
             for (let key in snapshot.val().boards) {
@@ -145,6 +136,7 @@ function BoardItemInfo(props) {
                 );
             }
             temp = [];
+            console.log(temp);
         }
     }, [])
 

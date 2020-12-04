@@ -5,7 +5,7 @@ import './MyPage.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Scrap from '../UtilComponent/Scrap.js';
 import MyBoard from '../UtilComponent/MyBoard.js';
-
+import BoardItemInfo from '../UtilComponent/BoardItemInfo'
 
 function MyPage(props) {
     console.log("MyPage 실행")
@@ -17,9 +17,9 @@ function MyPage(props) {
     },[])
 
     return (
-        <Router basename="/mypage">
+        <Router>
             <div className="MyPage_Header">
-                <Link className={link1} to="/" onClick={()=>{
+                <Link className={link1} to="/myboard" onClick={()=>{
                     setlink1('OnPage1');
                     setlink2('MyPage_linkitem')
                 }}>나의글</Link>
@@ -29,13 +29,11 @@ function MyPage(props) {
                 }}>스크랩</Link>
             </div>
             <div className="MyPage_ContentBox">
-                <Route exact path="/" render={() => <MyBoard />} />
+                <Route path="/myboard" render={() => <MyBoard />} />
                 <Route path="/scrap" render={() => <Scrap />} />
+                <Route path="/info" render={() => <BoardItemInfo />} />
             </div>
         </Router>
-
-
-
     )
 }
 

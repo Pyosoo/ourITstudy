@@ -11,6 +11,9 @@ import './GoogleSignin.css';
 import { connect } from 'react-redux';
 import { actionCreators } from '../store';
 
+
+
+
 let provider = new firebase.auth.GithubAuthProvider();
 
 function GoogleSignin(props){
@@ -30,7 +33,7 @@ function GoogleSignin(props){
     auth.onAuthStateChanged(user => {
       if(user != null){
         props.updateState(auth.currentUser, props.StoreData.fromDatabase);
-       // console.log(auth.currentUser);
+        sessionStorage.setItem('id', auth.currentUser.displayName);
       }
     })
    
